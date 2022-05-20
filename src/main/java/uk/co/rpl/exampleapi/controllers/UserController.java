@@ -20,7 +20,7 @@ import uk.co.rpl.exampleapi.dtos.User;
 @Api
 public class UserController {
     List<User> users = asList(
-            "John Smith", "Mary Jones", "Jennifer Eccles", "Jack Spat")
+            "John Smith", "Mary Jones", "Jennifer Eccles", "Jack Spratt")
             .stream()
             .map(us -> {
                 var pair = us.split(" ");
