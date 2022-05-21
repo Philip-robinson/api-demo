@@ -38,6 +38,7 @@ There are two controllers
 
 * __uk.co.rpl.exampleapi.controllers.HomeController__
 * __uk.co.rpl.exampleapi.controllers.UserController__
+
 and 1 exception handler
 * __uk.co.rpl.exampleapi.controllers.ExceptionHandlers__
 
