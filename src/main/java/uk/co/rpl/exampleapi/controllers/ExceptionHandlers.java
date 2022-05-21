@@ -8,8 +8,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpClientErrorException.NotFound;
+import uk.co.rpl.exampleapi.exceptions.NotFound;
 
 /**
  *
@@ -17,12 +16,13 @@ import org.springframework.web.client.HttpClientErrorException.NotFound;
  */
 @ControllerAdvice
 public class ExceptionHandlers {
-    @ExceptionHandler({HttpClientErrorException.class, NotFound.class})
+    @ExceptionHandler({NotFound.class})
     public ResponseEntity<String> handleNotFound(Exception e){
         return new ResponseEntity<>("""
                                     {
-                                        "message": "Not found"
+                                        "message": "{msg}"
                                     }
-                                    """,NOT_FOUND);
+                                    """.replace("{msg}", e.getMessage()),
+                                    NOT_FOUND);
     }
 }
