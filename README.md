@@ -52,12 +52,12 @@ the controller routes three end points:
 
 In all cases the returned data for a User is just  the two fields __firstName__ and __lastName__.
 
-__ExceptionHandler__ processes exceptions that are not caugth before they leave the controllers.
+__ExceptionHandler__ processes exceptions that are not caught before they leave the controllers.
 
 It is marked with the annotation __@ControllerAdvice__ which indicates special controller configuration.
 
-It only contains a single Handler which handles the NotFound exception thrown from the __UserController__
-from the __/api/user/{id}__ end point if id is out of bounds.
+It only contains a single Handler which handles the NotFound exception thrown from the __UserService's__
+__get(int id)__ method and hence from the __/api/user/{id}__ end point if id is out of bounds.
 
 ### Testing
 There are 3 test classes
