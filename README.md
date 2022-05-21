@@ -42,7 +42,9 @@ There are two controllers
 and 1 exception handler
 * __uk.co.rpl.exampleapi.controllers.ExceptionHandlers__
 
-__HomeController__ only redirects / to swagger documentation, so Swagger docs should be found at __http://localhost:8081/__.
+__HomeController__ only redirects / to swagger documentation, so Swagger docs should be found at __http://localhost:8081/__,
+if you have not seen Swagger before it is an excellent way of automatically documenting an api, much more information
+can be displayed than done here thrugh a whole range of annotations.
 
 __UserController__ provides information about Users, there are within it a fixed list of 4 users, 
 the controller routes three end points:
