@@ -81,4 +81,4 @@ only the url is used in these cases.
 The perform method returns a ResultActions class, you can use __andExpect__ to test various aspects of the result.
 
 * __UserServiceTest__ tests the user service class, each __@Test__ method executes one of the methods in __UserService__
-and then tests for correctness the returned data.
+and then tests for correctness the returned data using __assertThat__.
