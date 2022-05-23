@@ -50,11 +50,7 @@ public class UserServiceTest {
     @Test
     public void testGet4Exception() {
         System.out.println("testGet4Exception");
-        var thrown = assertThrows(NotFound.class, ()->{
-            assertThat(inst.get(4))
-                    .extracting("firstName", "lastName")
-                    .containsExactly("Jack", "Spratt");
-        });
+        var thrown = assertThrows(NotFound.class, ()-> inst.get(4));
         assertThat(thrown).extracting("message")
                 .isEqualTo("Given index (4) not found");
     }
