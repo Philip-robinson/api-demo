@@ -25,21 +25,29 @@ public class UserController {
     @ApiOperation("Get first user")
     @GetMapping("/api/main-user")
     public User getMainUser(){
-        return users.get(0);
+        log.info("called /api/main-user");
+        var res = users.get(0);
+        log.debug("/api/main-user returns {}", res);
+        return res;
     }
 
     @ApiOperation("Get identified user")
     @GetMapping("/api/user/{id}")
     public User getUser(
         @PathVariable int id){
-        log.debug("calling users.get({})", id);
-        return users.get(id);
+        log.info("called /api/user/{}", id);
+        var res = users.get(id);
+        log.debug("/api/users/{} reurned {}", id, res);
+        return res;
     }
 
 
     @ApiOperation("Get all users")
     @GetMapping("/api/users")
     public List<User> getAllUsers(){
-        return users.getUsers();
+        log.info("called /api/users");
+        var res = users.getUsers();
+        log.debug("/api/users returned {}", res);
+        return res;
     }
 }

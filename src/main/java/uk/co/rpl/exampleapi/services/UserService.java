@@ -16,7 +16,7 @@ import uk.co.rpl.exampleapi.exceptions.NotFound;
 @Slf4j
 public class UserService {
     private final List<User> users;
-        
+
     public UserService(){
         users = new ArrayList();
         users.add(new User("John", "Smith"));
@@ -29,7 +29,9 @@ public class UserService {
         log.debug("get({})", id);
         if (id>=users.size() || id < 0)
             throw new NotFound("Given index ("+id+") not found");
-        return(users.get(id));
+        var res = users.get(id);
+        log.debug("Got user {}", res);
+        return res;
     }
 
     public List<User> getUsers(){
