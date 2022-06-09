@@ -33,7 +33,7 @@ i.e. if you create a file __application.properties__ containing:
 ```
 server.port: 8087
 ```
-and run the jar from the directory it is in then the server will listen on port __8087__
+and run the jar from the directory it is in, then the server will listen on port __8087__
  
 ## Swagger
 
