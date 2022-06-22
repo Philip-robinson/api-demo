@@ -1,7 +1,3 @@
-/*
- *
- *
- */
 package uk.co.rpl.exampleapi.swagger;
 
 import org.springframework.context.annotation.Bean;
