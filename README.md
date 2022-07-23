@@ -33,7 +33,7 @@ i.e. if you create a file __application.properties__ containing:
 ```
 server.port: 8087
 ```
-and run the jar from the directory it is in then the server will listen on port __8087__
+and run the jar from the directory it is in, then the server will listen on port __8087__
  
 ## Swagger
 
@@ -82,12 +82,18 @@ the controller routes three end points:
 
 In all cases the returned data for a User is just  the two fields __firstName__ and __lastName__.
 
+#### Exception Handler
+
 __ExceptionHandler__ processes exceptions that are not caught before they leave the controllers.
 
 It is marked with the annotation __@ControllerAdvice__ which indicates special controller configuration.
 
-It only contains a single Handler which handles the NotFound exception thrown from the __UserService's__
-__get(int id)__ method and hence from the __/api/user/{id}__ end point if __id__ is out of bounds.
+It only contains two handlers, these handle the NotFound exception in one way and all other exceptions differently.
+
+__NotFound__ is thrown from the __UserService's__
+__get(int id)__ method and hence from the __/api/user/{id}__ end point if __id__ is out of bounds. This will result in a __404 Not Found__ error being returned.
+
+All other errors are trapped by the second exception handler, this causes a __500 Internal Server Error__ to be returned.
 
 ### Testing
 
@@ -122,4 +128,4 @@ which means extract the fields __"xx"__ and __"yy"__ from object and check that
 __"xx"__ has the value __"aa"__ and __"yy"__ has the value __"bb"__.
 
 This will work if the object has getters __getXx()__ and __getYy()__ or is a
-Map containing entries __"xx"__ and __"yy"__
+Map containing entries __"xx"__ and __"yy"__.

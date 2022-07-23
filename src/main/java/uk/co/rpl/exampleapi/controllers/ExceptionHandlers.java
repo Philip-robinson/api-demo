@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package uk.co.rpl.exampleapi.controllers;
 
@@ -34,5 +34,14 @@ public class ExceptionHandlers {
                                     }
                                     """.replace("{msg}", e.getMessage()),
                                     NOT_FOUND);
+    }
+    @ExceptionHandler({Throwable.class})
+    public ResponseEntity<String> handleGenException(Throwable e){
+        return new ResponseEntity<>("""
+                                    {
+                                        "message": "{msg}"
+                                    }
+                                    """.replace("{msg}", e.getMessage()),
+                                    INTERNAL_SERVER_ERROR);
     }
 }
