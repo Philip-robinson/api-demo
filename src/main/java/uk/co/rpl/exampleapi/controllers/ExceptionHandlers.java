@@ -17,15 +17,6 @@ import uk.co.rpl.exampleapi.exceptions.NotFound;
  */
 @ControllerAdvice
 public class ExceptionHandlers {
-    @ExceptionHandler({Throwable.class})
-    public ResponseEntity<String> handleNotFound(Throwable e){
-        return new ResponseEntity<>("""
-                                    {
-                                        "message": "{msg}"
-                                    }
-                                    """.replace("{msg}", e.getMessage()),
-                INTERNAL_SERVER_ERROR);
-    }
     @ExceptionHandler({NotFound.class})
     public ResponseEntity<String> handleNotFound(NotFound e){
         return new ResponseEntity<>("""
