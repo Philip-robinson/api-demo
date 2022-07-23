@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package uk.co.rpl.exampleapi.controllers;
 
@@ -27,9 +27,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author philip
  */
 public class UserControllerTest {
-    
+
     private UserService service;
     private UserController inst;
+    private ExceptionHandlers excHandler;
 
     private static final String FIRST_1="usernumberone";
     private static final String FIRST_2="Second-User";
@@ -41,6 +42,7 @@ public class UserControllerTest {
     private static final int MAIN_INDEX=0;
     private static final int GOOD_INDEX=1;
     private static final int BAD_INDEX=4;
+    private static final int BAD_INDEX_2=8;
 
     private MockMvc mvc;
 
@@ -48,19 +50,21 @@ public class UserControllerTest {
     public void setUpClass() {
         service = mock(UserService.class);
         inst = new UserController(service);
+        excHandler = new ExceptionHandlers();
         users = Arrays.asList(new User(FIRST_1, SECOND_1),
                        new User(FIRST_2, SECOND_2));
         when(service.getUsers()).thenReturn(users);
         when(service.get(MAIN_INDEX)).thenReturn(new User(FIRST_2, SECOND_2));
         when(service.get(GOOD_INDEX)).thenReturn(new User(FIRST_1, SECOND_1));
         when(service.get(BAD_INDEX)).thenThrow(new NotFound("NOT_FOUND"));
+        when(service.get(BAD_INDEX_2)).thenThrow(new RuntimeException("Catastrophy"));
 
         mvc = MockMvcBuilders
-                .standaloneSetup(inst)
+                .standaloneSetup(inst, excHandler)
                 .setControllerAdvice(new ExceptionHandlers())
                 .build();
     }
-    
+
     /**
      * Test of getMainUser method, of class UserController.
      */
@@ -95,6 +99,14 @@ public class UserControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    public void testGetUserInternalServerError() throws Exception {
+        System.out.println("getUser");
+        mvc.perform(get("/api/user/"+BAD_INDEX_2))
+                .andExpect(status().is(500))
+                .andDo(print());
+    }
+
     /**
      * Test of getAllUsers method, of class UserController.
      */
@@ -108,5 +120,5 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.[0].firstName").value(FIRST_1))
                 .andExpect(jsonPath("$.[1].lastName").value(SECOND_2));
     }
-    
+
 }
